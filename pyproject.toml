@@ -1,0 +1,240 @@
+[build-system]
+requires = ["flit_core==3.9.0"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "matlab_python_interop"
+version = "0.0.0"
+description = "Documentation for two-way interoperation between Matlab and Python."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+classifiers = ["License :: OSI Approved :: MIT License"]
+dependencies = []
+[project.urls]
+Changes = "https://blakeNaccarato.github.io/matlab_python_interop/changelog.html"
+Docs = "https://blakeNaccarato.github.io/matlab_python_interop"
+Home = "https://github.com/blakeNaccarato/matlab_python_interop"
+Tracker = "https://github.com/blakeNaccarato/matlab_python_interop/issues"
+[[project.authors]]
+name = "Blake Naccarato"
+email = "blake.naccarato@gmail.com"
+
+[tool.fawltydeps]
+deps = ["pyproject.toml"]
+code = ["src"]
+
+[tool.pytest.ini_options]
+addopts = '''
+    --strict-config
+    --strict-markers
+    --color yes
+    -p no:legacypaths
+    -r a
+'''
+cache_dir = ".cache/.pytest_cache"
+markers = "slow"
+testpaths = "tests"
+xfail_strict = true
+
+[tool.coverage.run]
+branch = true
+source = ["matlab_python_interop"]
+[tool.coverage.report]
+ignore_errors = true
+
+[tool.pyright]
+exclude = ["**/node_modules", "**/__pycache__", "**/.*", "submodules"]
+stubPath = "submodules/typings"
+typeCheckingMode = "strict"
+# Default "true" in strict
+analyzeUnannotatedFunctions = true
+strictParameterNoneValue = true
+enableTypeIgnoreComments = true
+disableBytesTypePromotions = true
+strictListInference = true
+strictDictionaryInference = true
+strictSetInference = true
+# Default "false" in strict
+deprecateTypingAliases = false
+enableExperimentalFeatures = false
+# Default "warning" in strict
+reportMissingModuleSource = "warning"
+# Default "error" in strict
+reportMissingImports = "warning"
+reportInvalidTypeForm = "warning"
+reportUndefinedVariable = "warning"
+reportAssertAlwaysTrue = "warning"
+reportInvalidStringEscapeSequence = "warning"
+reportInvalidTypeVarUse = "warning"
+reportMissingTypeStubs = "none"                # Overeager
+reportSelfClsParameterName = "warning"
+reportUnsupportedDunderAll = "warning"
+reportUnusedExpression = "none"                # Handled by Ruff
+reportWildcardImportFromLibrary = "warning"
+reportAbstractUsage = "warning"
+reportArgumentType = "warning"
+reportAssertTypeFailure = "warning"
+reportAssignmentType = "warning"
+reportAttributeAccessIssue = "warning"
+reportCallIssue = "warning"
+reportGeneralTypeIssues = "warning"
+reportInconsistentOverload = "warning"
+reportIndexIssue = "warning"
+reportInvalidTypeArguments = "warning"
+reportNoOverloadImplementation = "warning"
+reportOperatorIssue = "warning"
+reportOptionalSubscript = "warning"
+reportOptionalMemberAccess = "warning"
+reportOptionalCall = "warning"
+reportOptionalIterable = "warning"
+reportOptionalContextManager = "warning"
+reportOptionalOperand = "warning"
+reportRedeclaration = "warning"
+reportReturnType = "warning"
+reportTypedDictNotRequiredAccess = "warning"
+reportPrivateImportUsage = "none"              # Flaky regarding "not exported"
+reportUnboundVariable = "warning"
+reportUnusedCoroutine = "none"                 # Handled by Ruff
+reportUnusedExcept = "warning"
+reportFunctionMemberAccess = "warning"
+reportIncompatibleMethodOverride = "warning"
+reportIncompatibleVariableOverride = "warning"
+reportOverlappingOverload = "warning"
+reportPossiblyUnboundVariable = "warning"
+reportConstantRedefinition = "none"
+reportDeprecated = "warning"
+reportDuplicateImport = "warning"
+reportIncompleteStub = "warning"
+reportInconsistentConstructor = "warning"
+reportInvalidStubStatement = "warning"
+reportMatchNotExhaustive = "warning"
+reportMissingParameterType = "none"
+reportMissingTypeArgument = "warning"
+reportPrivateUsage = "none"                    # Ruff checks this well enough
+reportTypeCommentUsage = "warning"
+reportUnknownArgumentType = "none"
+reportUnknownLambdaType = "none"
+reportUnknownMemberType = "none"
+reportUnknownParameterType = "none"
+reportUnknownVariableType = "none"
+reportUnnecessaryCast = "warning"
+reportUnnecessaryComparison = "warning"
+reportUnnecessaryContains = "warning"
+reportUnnecessaryIsInstance = "warning"
+reportUnusedClass = "none"                     # Handled by Ruff
+reportUnusedImport = "none"                    # Handled by Ruff
+reportUnusedFunction = "none"                  # Handled by Ruff
+reportUnusedVariable = "none"                  # Handled by Ruff
+reportUntypedBaseClass = "none"
+reportUntypedClassDecorator = "warning"
+reportUntypedFunctionDecorator = "none"        # Often out of our control
+reportUntypedNamedTuple = "warning"
+# Default "none" in strict
+reportCallInDefaultInitializer = "none"
+reportImplicitOverride = "none"
+reportImplicitStringConcatenation = "none"
+reportImportCycles = "none"
+reportMissingSuperCall = "none"
+reportPropertyTypeMismatch = "none"
+reportShadowedImports = "none"
+reportUninitializedInstanceVariable = "warning" # Ensure we define instance vars
+reportUnnecessaryTypeIgnoreComment = "none"
+reportUnusedCallResult = "none"
+
+[tool.ruff]
+cache-dir = ".cache/.ruff_cache"
+extend-exclude = ["submodules"]
+extend-include = ["*.ipynb"]
+src = ["src"]
+output-format = "grouped"
+fix = true
+preview = true
+show-fixes = true
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+select = ["ALL"]
+unfixable = [
+    "PIE790", # Don't remove `pass`/`...`, overridden in pre-commit
+]
+extend-ignore = [
+    "ANN",     # Don't require type annotations
+    "ARG005",  # Allow unused lambda argument. For consistency across df pipelines.
+    "C408",    # Allow dict calls
+    "COM",     # Allow magic commas and magic missing commas
+    "CPY001",  # Don't check for copyright
+    "D10",     # Missing docstrings
+    "D20",     # Don't reformat docstrings in these ways
+    "D213",    # Multi-line docstring summary should start at the second line
+    "D402",    # False positives for parens in first line
+    "D415",    # Don't check docstring punctuation, can be flaky for autodoc
+    "D412",    # Allow blanks below headers in Google-style docstrings
+    "DTZ",     # Timezones are important, but only contextually necessary.
+    "E501",    # Don't check line length. Black handles this.
+    "EM",      # Don't check for exception message issues
+    "ERA",     # False positives. Don't get rid of commented out code.
+    "FBT",     # Allow boolean "traps"
+    "FIX002",  # Allow TODOs
+    "FLY002",  # Allow different string representations
+    "FURB140", # Don't replace comprehensions with starmap
+    "G0",      # Allow f-strings, etc. in Loguru logging
+    "INP001",  # False positives. Checks for packages missing `__init__.py`
+    "ISC",     # False positives. Implicit string concatenation is fine.
+    "PD009",   # Allow `df.iat`.
+    "PD011",   # Allow use of `.values`. False positives.
+    "PD013",   # Allow `stack` instead of `melt`. They're not a direct swap.
+    "PD101",   # Allow use of nunique(). False positives
+    "PD901",   # Allow `df` variable name. We are all consenting adults here.
+    "PD011",   # Allow use of `.values`. False positives.
+    "PLR6201", # Don't require set literal for membership checks
+    "PGH003",  # Until black stops wrapping special ignores, let's allow bare
+    "PIE804",  # Allow dict unpack even if unnecessary, consisent for df.assign{**...}
+    "PLC2701", # Allow private name imports
+    "PLR0913", # Allow more than five function arguments
+    "PLR0914", # Allow lots of local variables
+    "PLR0917", # Allow more than five positional arguments
+    "PLR1704", # Allow redefining arguments, often for sanitization
+    "PLR2004", # Allow magic values. This check is too sensitive
+    "PLR6201", # Don't require set literal for membership checks
+    "PLR6301", # Allow methods that don't reference self, may be overridden
+    "PLW0108", # Don't warn about unnecessary lambda. Often needed in pandas chains
+    "PLW2901", # For loop variable
+    "RET",     # Return checks are flaky, Sourcery does fine analysing these paths
+    "S301",    # Don't warn about pickling.
+    "S403",    # Don't warn about pickle-like modules.
+    "S404",    # Don't warn about subprocess.
+    "TCH",     # Type checking linter doesn't play nicely with pydantic
+    "TD",      # Disable to-do validation. Too pedantic for now.
+    "TRY003",  # Allow long exception messages
+    "W2",      # Allow whitespace issues. Fixed automatically by black.
+]
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = false
+[tool.ruff.format]
+skip-magic-trailing-comma = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.extend-per-file-ignores]
+"**/*.ipynb" = [
+    "B018", # Allow "useless" expressions, which do suppress outputs in notebooks
+    "E703", # Allow semicolons to suppress outputs in notebooks
+    "F821", # Allow undefined names, such as `display`
+    "S101", # Allow assert
+    "T201", # Allow print in notebooks
+]
+"docs/**" = [
+    "E402", # Need to allow imports below patches in docs notebooks
+]
+"tests/**" = [
+    "ARG001", # Allow unused arguments
+    "S101",   # Allow assert
+    "SIM300", # Allow constants (expectations) on the RHS
+    "SLF001", # Allow private member access in tests
+]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["typer.Argument", "typer.Option"]

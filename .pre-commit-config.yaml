@@ -1,0 +1,110 @@
+ci:
+  skip:
+    - "sync"
+    - "pytest-fast-only"
+    - "check-undeclared"
+    - "check-unused"
+  autoupdate_schedule: "quarterly"
+default_install_hook_types:
+  - pre-commit
+  - post-checkout # sync-python
+repos:
+  - repo: "meta"
+    hooks:
+      # ? Enable this to ensure each hook runs against at least one file
+      # - id: "check-hooks-apply"
+      - id: "check-useless-excludes"
+  - repo: "local"
+    hooks:
+      - id: "sync"
+        name: "sync"
+        stages:
+          - "pre-commit"
+          - "post-checkout"
+        pass_filenames: false
+        language: "system"
+        entry: "pwsh scripts/Sync-Py.ps1"
+        files: |
+          (?x)^(
+            .*/pyproject\.toml
+            |docs/.*\.ipynb
+            |params\.yaml
+            |requirements/.*
+            |scripts/.*
+          )$
+      - id: "pytest-fast-only"
+        name: "pytest-fast-only"
+        pass_filenames: false
+        language: "system"
+        entry: |
+          pwsh -Command "pytest -m 'not slow' --suppress-no-test-exit-code"
+        files: |
+          (?x)^(
+            .*/pyproject\.toml
+            |docs/.*
+            |requirements/.*
+            |scripts/.*
+            |src/.*
+            |tests/.*
+          )$
+  - repo: "https://github.com/pre-commit/pre-commit-hooks"
+    rev: "v4.5.0"
+    hooks:
+      - id: "end-of-file-fixer"
+      - id: "trailing-whitespace"
+  - repo: "https://github.com/tweag/FawltyDeps"
+    rev: "v0.15.0"
+    hooks:
+      - id: "check-unused"
+        files: |
+          (?x)^(
+            pyproject\.toml
+          )$
+      - id: "check-undeclared"
+        name: "check-undeclared-src"
+        files: |
+          (?x)^(
+            src/.*
+          )$
+      - id: "check-undeclared"
+        name: "check-undeclared-docs"
+        args: ["--config-file", "docs/pyproject.toml", "--code"]
+        files: |
+          (?x)^(
+            docs/.*
+          )$
+      - id: "check-undeclared"
+        name: "check-undeclared-tests"
+        args: ["--config-file", "tests/pyproject.toml", "--code"]
+        files: |
+          (?x)^(
+            tests/.*
+          )$
+  - repo: "https://github.com/DavidAnson/markdownlint-cli2"
+    rev: "v0.12.1"
+    hooks:
+      - id: "markdownlint-cli2"
+  - repo: "https://github.com/srstevenson/nb-clean"
+    rev: "3.2.0"
+    hooks:
+      - id: "nb-clean"
+        args:
+          - "--remove-empty-cells"
+          - "--preserve-notebook-metadata"
+          - "--preserve-cell-metadata"
+          - "tags"
+          - "--"
+        files: |
+          (?x)^(
+            docs/.*
+            |src/.*
+            |tests/.*
+          )$
+  - repo: "https://github.com/charliermarsh/ruff-pre-commit"
+    rev: "v0.3.3"
+    hooks:
+      - id: "ruff"
+        args: ["--extend-fixable", "PIE790"]
+        types_or: ["python", "pyi", "jupyter"]
+      - id: "ruff-format"
+        types_or: ["python", "pyi", "jupyter"]

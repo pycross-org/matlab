@@ -1,0 +1,20 @@
+[build-system]
+requires = ["flit_core==3.9.0"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "matlab_python_interop_tests"
+version = "0.0.0"
+description = "Tests."
+dependencies = [
+    "pytest-cov==4.1.0",
+    "pytest-custom-exit-code==0.3.0",
+    "pytest-github-actions-annotate-failures==0.2.0",
+    "pytest==8.0.0",
+]
+
+[tool.fawltydeps]
+actions = ["check_undeclared"]
+deps = ["tests/pyproject.toml", "pyproject.toml"]
+code = ["tests/matlab_python_interop_tests"]
+ignore_undeclared = ["matlab_python_interop"]

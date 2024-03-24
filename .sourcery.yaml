@@ -1,0 +1,18 @@
+version: "1"
+
+ignore:
+  # The defaults
+  - ".git"
+  - "venv"
+  - ".venv"
+  - "env"
+  - ".env"
+  - ".tox"
+  - "node_modules"
+  - "vendor"
+  # Extras
+  - ".*"
+
+rule_settings:
+  python_version: "3.11"
+  enable: ["default"]
