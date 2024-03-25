@@ -79,7 +79,7 @@ def dpath(path: Path, rel: Path = DOCS) -> str:
 # ! Basics
 project = PACKAGE
 copyright = f"{date.today().year}, Blake Naccarato"  # noqa: A001
-version = "0.0.0"
+version = "2024.03.02"
 master_doc = "index"
 language = "en"
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]

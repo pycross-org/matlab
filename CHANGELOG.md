@@ -6,9 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [2024.03.02]
+
+- Release under new name.
+
 ## [2024.03.01]
 
 - Generate repository from the [blakeNaccarato/copier-python](https://github.com/blakeNaccarato/copier-python) project template.
 
-[Unreleased]: https://github.com/pycross/pyxmatlab/compare/2024.03.01...HEAD
+[Unreleased]: https://github.com/pycross/pyxmatlab/compare/2024.03.02...HEAD
+[2024.03.02]: https://github.com/pycross/pyxmatlab/compare/2024.03.01...2024.03.02
 [2024.03.01]: https://github.com/pycross/pyxmatlab/releases/tag/2024.03.01
