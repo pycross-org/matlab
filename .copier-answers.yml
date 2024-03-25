@@ -3,11 +3,11 @@ _commit: a283f46
 _src_path: gh:blakeNaccarato/copier-python
 actions_runner: ubuntu-22.04
 active: true
-github_repo_name: matlab_python_interop
-project_description: Documentation for two-way interoperation between Matlab and Python.
+github_repo_name: matlab
+project_description: What do you get when you cross Python with MATLAB?
 project_email: blake.naccarato@gmail.com
-project_name: matlab_python_interop
-project_owner_github_username: blakeNaccarato
+project_name: pyxmatlab
+project_owner_github_username: pycross
 project_owner_name: Blake Naccarato
 project_version: 0.0.0
 python_version: '3.11'

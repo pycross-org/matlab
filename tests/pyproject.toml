@@ -3,7 +3,7 @@ requires = ["flit_core==3.9.0"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "matlab_python_interop_tests"
+name = "pyxmatlab_tests"
 version = "0.0.0"
 description = "Tests."
 dependencies = [
@@ -16,5 +16,5 @@ dependencies = [
 [tool.fawltydeps]
 actions = ["check_undeclared"]
 deps = ["tests/pyproject.toml", "pyproject.toml"]
-code = ["tests/matlab_python_interop_tests"]
-ignore_undeclared = ["matlab_python_interop"]
+code = ["tests/pyxmatlab_tests"]
+ignore_undeclared = ["pyxmatlab"]

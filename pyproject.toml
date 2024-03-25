@@ -3,19 +3,19 @@ requires = ["flit_core==3.9.0"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "matlab_python_interop"
+name = "pyxmatlab"
 version = "0.0.0"
-description = "Documentation for two-way interoperation between Matlab and Python."
+description = "What do you get when you cross Python with MATLAB?"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"
 classifiers = ["License :: OSI Approved :: MIT License"]
 dependencies = []
 [project.urls]
-Changes = "https://blakeNaccarato.github.io/matlab_python_interop/changelog.html"
-Docs = "https://blakeNaccarato.github.io/matlab_python_interop"
-Home = "https://github.com/blakeNaccarato/matlab_python_interop"
-Tracker = "https://github.com/blakeNaccarato/matlab_python_interop/issues"
+Changes = "https://pycross.github.io/matlab/changelog.html"
+Docs = "https://pycross.github.io/matlab"
+Home = "https://github.com/pycross/matlab"
+Tracker = "https://github.com/pycross/matlab/issues"
 [[project.authors]]
 name = "Blake Naccarato"
 email = "blake.naccarato@gmail.com"
@@ -39,7 +39,7 @@ xfail_strict = true
 
 [tool.coverage.run]
 branch = true
-source = ["matlab_python_interop"]
+source = ["pyxmatlab"]
 [tool.coverage.report]
 ignore_errors = true
 

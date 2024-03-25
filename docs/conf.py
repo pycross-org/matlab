@@ -7,7 +7,7 @@ from pathlib import Path
 
 from sphinx.application import Sphinx
 
-PACKAGE = "matlab_python_interop"
+PACKAGE = "pyxmatlab"
 """Package name."""
 DOCS = Path("docs")
 """Docs directory."""
@@ -106,7 +106,7 @@ html_context = {
     "default_mode": "light"
 }
 COMMON_OPTIONS = {
-    "repository_url": f"https://github.com/blakeNaccarato/{PACKAGE}",
+    "repository_url": f"https://github.com/pycross/{PACKAGE}",
     "path_to_docs": dpath(DOCS),
 }
 html_theme_options = {

@@ -6,14 +6,14 @@ on:
     paths:
       - ".github/workflows/contrib.yml"
       - "scripts/Sync-Py.ps1"
-      - "scripts/matlab_python_interop_tools/**"
+      - "scripts/pyxmatlab_tools/**"
       - "scripts/pyproject.toml"
   push:
     branches: ["main"]
     paths:
       - ".github/workflows/contrib.yml"
       - "scripts/Sync-Py.ps1"
-      - "scripts/matlab_python_interop_tools/**"
+      - "scripts/pyxmatlab_tools/**"
       - "scripts/pyproject.toml"
 defaults:
   run:

@@ -53,7 +53,7 @@ pip install --quiet --requirement=requirements/sync.in
 'PRE-SYNC DEPENDENCIES INSTALLED' | Write-Progress -Done
 
 'INSTALLING TOOLS' | Write-Progress
-# ? Install the `matlab_python_interop_tools` Python module
+# ? Install the `pyxmatlab_tools` Python module
 if ($Env:CI) { uv pip install --system --break-system-packages --editable=scripts }
 else { uv pip install --editable=scripts }
 
@@ -74,14 +74,14 @@ if ($Env:CI) {
 
 # ? Compile
 'COMPILING' | Write-Progress
-$Comps = matlab_python_interop_tools compile
+$Comps = pyxmatlab_tools compile
 $Comp = $High ? $Comps[1] : $Comps[0]
 'COMPILED' | Write-Progress -Done
 
 # ? Lock
 if ($Lock) {
     'LOCKING' | Write-Progress
-    matlab_python_interop_tools lock
+    pyxmatlab_tools lock
     'LOCKED' | Write-Progress -Done
 }
 
@@ -95,7 +95,7 @@ else { uv pip sync $Comp }
 if (!$NoPostSync) {
     '*** RUNNING POST-SYNC TASKS' | Write-Progress
     'SYNCING LOCAL DEV CONFIGS' | Write-Progress
-    matlab_python_interop_tools 'sync-local-dev-configs'
+    pyxmatlab_tools 'sync-local-dev-configs'
     'LOCAL DEV CONFIGS SYNCED' | Write-Progress -Done
     'INSTALLING PRE-COMMIT HOOKS' | Write-Progress
     pre-commit install

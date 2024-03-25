@@ -9,8 +9,8 @@ from typing import NamedTuple
 
 from cyclopts import App
 
-from matlab_python_interop_tools import sync
-from matlab_python_interop_tools.sync import (
+from pyxmatlab_tools import sync
+from pyxmatlab_tools.sync import (
     COMPS,
     PYPROJECT,
     PYRIGHTCONFIG,

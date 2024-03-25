@@ -1,3 +1,3 @@
-# matlab_python_interop
+# pyxmatlab
 
-Documentation for two-way interoperation between Matlab and Python.
+What do you get when you cross Python with MATLAB?

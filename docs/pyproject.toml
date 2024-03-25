@@ -3,7 +3,7 @@ requires = ["flit_core==3.9.0"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "matlab_python_interop_docs"
+name = "pyxmatlab_docs"
 version = "0.0.0"
 description = "Docs."
 dependencies = [
@@ -25,4 +25,4 @@ dependencies = [
 [tool.fawltydeps]
 actions = ["check_undeclared"]
 deps = ["docs/pyproject.toml", "pyproject.toml"]
-code = ["docs/matlab_python_interop_docs"]
+code = ["docs/pyxmatlab_docs"]
