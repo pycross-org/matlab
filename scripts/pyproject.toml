@@ -7,15 +7,25 @@ name = "pyxmatlab_tools"
 version = "0.0.0"
 description = "Tools."
 dependencies = [
-    "copier==9.1.1",
-    "cyclopts==2.5.0",
-    "pre-commit==3.7.0",
-    "zstandard==0.22.0",
+    # ? Core script tools
+    "copier==9.2.0",
+    "cyclopts==2.6.1",
+    "pipx==1.5.0",
 ]
 [project.scripts]
-pyxmatlab_tools = "pyxmatlab_tools.__main__:main"
+"pyxmatlab_tools" = "pyxmatlab_tools.__main__:main"
 
 [tool.fawltydeps]
-actions = ["check_undeclared"]
-deps = ["scripts/pyproject.toml", "pyproject.toml"]
+deps = ["scripts/pyproject.toml"]
 code = ["scripts/pyxmatlab_tools"]
+ignore_undeclared = [
+    "pyxmatlab_docs",
+    "pyxmatlab_tests",
+    "pyxmatlab_tools",
+    "pyxmatlab",
+]
+ignore_unused = [
+    # ? Core script tools
+    "copier", # For template sync
+    "pipx",   # For `pipx run` of scripts with dependencies isolated by PEP 723
+]

@@ -1,5 +1,5 @@
 <#.SYNOPSIS
-Sync project with template.#>
+Sync with template.#>
 Param(
     # Prompt for new answers.
     [switch]$Prompt,
@@ -15,16 +15,20 @@ $template = 'submodules/template'
 $templateExists = $template | Test-Path
 if (!$templateExists -and $Stay) { return }
 if ($Recopy) {
-    if ($Prompt) { return copier recopy --overwrite }
-    return copier recopy --overwrite --defaults
+    $head = git rev-parse HEAD:submodules/template
+    if ($Prompt) { return copier recopy --overwrite --vcs-ref=$head }
+    return copier recopy --overwrite --defaults --vcs-ref=$head
 }
 if ($templateExists) {
     if (!$Stay) {
         git submodule update --init --remote --merge $template
         git add --all
         $msg = "Update template digest to $(git rev-parse HEAD:submodules/template)"
+        $origPreference = $ErrorActionPreference
+        $ErrorActionPreference = 'SilentlyContinue'
         if ($NoVerify) { git commit --no-verify -m $msg }
         else { git commit -m $msg }
+        $ErrorActionPreference = $origPreference
     }
     $head = git rev-parse HEAD:submodules/template
     if ($Prompt) { return copier update --vcs-ref=$head }

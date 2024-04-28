@@ -2,52 +2,71 @@
 
 from datetime import date
 from hashlib import sha256
-from os import environ
 from pathlib import Path
 
+from pyxmatlab_docs import DOCS, PYPROJECT, chdir_docs
+from pyxmatlab_docs.intersphinx import get_ispx, get_rtd, get_url
+from pyxmatlab_docs.types import IspxMappingValue
+from ruamel.yaml import YAML
 from sphinx.application import Sphinx
 
-PACKAGE = "pyxmatlab"
-"""Package name."""
-DOCS = Path("docs")
-"""Docs directory."""
+# ! Root
+ROOT = chdir_docs()
+"""Root directory of the project."""
+# ! Paths
 STATIC = DOCS / "_static"
 """Static assets folder, used in configs and setup."""
 CSS = STATIC / "local.css"
 """Local CSS file, used in configs and setup."""
+BIB_TEMPLATE = DOCS / "refs-template.bib"
+"""Project template bibliography file."""
 BIB = DOCS / "refs.bib"
 """Bibliography file."""
+COPIER_ANSWERS = ROOT / ".copier-answers.yml"
+"""Copier answers file."""
+# ! Template answers
+ANS = YAML().load(COPIER_ANSWERS.read_text(encoding="utf-8"))
+"""Project template answers."""
+AUTHORS = ANS["project_owner_name"]
+"""Authors of the project."""
+USER = ANS["project_owner_github_username"]
+"""Host GitHub user or organization for this repository."""
+REPO = ANS["github_repo_name"]
+"""GitHub repository name."""
+PACKAGE = ANS["project_name"]
+"""Package name."""
+VERSION = ANS["project_version"]
+"""Package version."""
+# ! Intersphinx and related
+ISPX_MAPPING: dict[str, IspxMappingValue] = {
+    **{pkg: get_rtd(pkg) for pkg in ["myst_parser", "numpydoc"]},
+    "jupyterbook": get_url("jupyterbook.org/en"),
+    "pytest": get_url("docs.pytest.org/en"),
+    "python": get_ispx("docs.python.org/3"),
+    "pandas": get_ispx("pandas.pydata.org/docs"),
+}
+"""Intersphinx mapping."""
+TIPPY_RTD_URLS = [
+    ispx.url
+    for pkg, ispx in ISPX_MAPPING.items()
+    if pkg not in ["python", "pandas", "matplotlib"]
+]
+"""Tippy ReadTheDocs-compatible URLs."""
 
 # ! Setup
 
 
 def setup(app: Sphinx):
     """Add functions to Sphinx setup."""
-    init_nb_env()
     app.connect("html-page-context", add_version_to_css)
-
-
-def init_nb_env():
-    """Initialize the environment which will be inherited for notebook execution."""
-    for key in [
-        key
-        for key in [
-            "PIP_DISABLE_PIP_VERSION_CHECK",
-            "PYTHONIOENCODING",
-            "PYTHONUTF8",
-            "PYTHONWARNDEFAULTENCODING",
-            "PYTHONWARNINGS",
-        ]
-        if environ.get(key) is not None
-    ]:
-        del environ[key]
-    environ["PYDEVD_DISABLE_FILE_VALIDATION"] = "1"
 
 
 def add_version_to_css(app: Sphinx, _pagename, _templatename, ctx, _doctree):
     """Add the version number to the local.css file, to bust the cache for changes.
 
-    See: https://github.com/executablebooks/MyST-Parser/blob/978e845543b5bcb7af0ff89cac9f798cb8c16ab3/docs/conf.py#L241-L249
+    See Also
+    --------
+    - https://github.com/executablebooks/MyST-Parser/blob/978e845543b5bcb7af0ff89cac9f798cb8c16ab3/docs/conf.py#L241-L249
     """
     if app.builder.name != "html":
         return
@@ -59,9 +78,12 @@ def add_version_to_css(app: Sphinx, _pagename, _templatename, ctx, _doctree):
 def dpaths(*paths: Path, rel: Path = DOCS) -> list[str]:
     """Get the string-representation of paths relative to docs for Sphinx config.
 
-    Args:
-        paths: Paths to convert.
-        rel: Relative path to convert to. Defaults to the 'docs' directory.
+    Parameters
+    ----------
+    paths
+        Paths to convert.
+    rel
+        Relative path to convert to. Defaults to the 'docs' directory.
     """
     return [dpath(path, rel) for path in paths]
 
@@ -69,17 +91,20 @@ def dpaths(*paths: Path, rel: Path = DOCS) -> list[str]:
 def dpath(path: Path, rel: Path = DOCS) -> str:
     """Get the string-representation of a path relative to docs for Sphinx config.
 
-    Args:
-        path: Path to convert.
-        rel: Relative path to convert to. Defaults to the 'docs' directory.
+    Parameters
+    ----------
+    path
+        Path to convert.
+    rel
+        Relative path to convert to. Defaults to the 'docs' directory.
     """
     return path.relative_to(rel).as_posix()
 
 
 # ! Basics
 project = PACKAGE
-copyright = f"{date.today().year}, Blake Naccarato"  # noqa: A001
-version = "2024.03.02"
+copyright = f"{date.today().year}, {AUTHORS}"  # noqa: A001
+version = VERSION
 master_doc = "index"
 language = "en"
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
@@ -93,6 +118,7 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinxcontrib.bibtex",
     "sphinxcontrib.mermaid",
+    "sphinxcontrib.towncrier",
 ]
 # ! Theme
 html_title = PACKAGE
@@ -106,11 +132,12 @@ html_context = {
     "default_mode": "light"
 }
 COMMON_OPTIONS = {
-    "repository_url": f"https://github.com/pycross/{PACKAGE}",
+    "repository_url": f"https://github.com/{USER}/{PACKAGE}",
     "path_to_docs": dpath(DOCS),
 }
 html_theme_options = {
     **COMMON_OPTIONS,
+    "navigation_with_keys": False,  # https://github.com/pydata/pydata-sphinx-theme/pull/1503
     "repository_branch": "main",
     "show_navbar_depth": 2,
     "show_toc_level": 4,
@@ -132,7 +159,7 @@ myst_enable_extensions = [
 myst_heading_anchors = 6
 myst_substitutions = {}
 # ! BibTeX
-bibtex_bibfiles = dpaths(BIB)
+bibtex_bibfiles = dpaths(BIB_TEMPLATE, BIB)
 bibtex_reference_style = "label"
 bibtex_default_style = "unsrt"
 # ! NB
@@ -143,17 +170,31 @@ math_eqref_format = "Eq. {number}"
 mermaid_d3_zoom = False
 # ! Autodoc2
 nitpicky = True
-autodoc2_packages = [f"../src/{PACKAGE}"]
+autodoc2_packages = [
+    f"../src/{PACKAGE}",
+    f"{PACKAGE}_docs",
+    f"../tests/{PACKAGE}_tests",
+    f"../scripts/{PACKAGE}_tools",
+]
 autodoc2_render_plugin = "myst"
 # ? Autodoc2 does not currently obey `python_display_short_literal_types` or
 # ? `python_use_unqualified_type_names`, but `maximum_signature_line_length` makes it a
 # ? bit prettier.
 # ? https://github.com/sphinx-extensions2/sphinx-autodoc2/issues/58
-maximum_signature_line_length = 88
+maximum_signature_line_length = 1
+# ? Parse Numpy docstrings
+autodoc2_docstring_parser_regexes = [(".*", f"{PACKAGE}_docs.docstrings")]
 # ! Intersphinx
-intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
+intersphinx_mapping = ISPX_MAPPING
 nitpick_ignore = []
-nitpick_ignore_regex = []
+nitpick_ignore_regex = [
+    # ? Missing inventory
+    (r"py:.*", r"docutils\..+"),
+    (r"py:.*", r"numpydoc\.docscrape\..+"),
+    (r"py:.*", r"_pytest\..+"),
+    # ? TypeAlias: https://github.com/sphinx-doc/sphinx/issues/10785
+    (r"py:.*", rf"{PACKAGE}.*\.types\..+"),
+]
 # ! Tippy
 # ? https://sphinx-tippy.readthedocs.io/en/latest/index.html#confval-tippy_anchor_parent_selector
 tippy_anchor_parent_selector = "article.bd-article"
@@ -171,5 +212,14 @@ tippy_tip_selector = """
     p,
     table
     """
-tippy_skip_urls = []
-tippy_rtd_urls = []
+# ? Skip Zenodo DOIs as the hover hint doesn't work properly
+tippy_rtd_urls = TIPPY_RTD_URLS
+tippy_skip_urls = [
+    # ? Skip Zenodo DOIs as the hover hint doesn't work properly
+    r"https://doi\.org/10\.5281/zenodo\..+"
+]
+# ! Towncrier
+towncrier_draft_autoversion_mode = "draft"
+towncrier_draft_include_empty = True
+towncrier_draft_working_directory = ROOT
+towncrier_draft_config_path = PYPROJECT

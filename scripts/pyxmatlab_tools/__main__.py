@@ -1,62 +1,28 @@
 """CLI for tools."""
 
-import tomllib
 from collections.abc import Collection
-from json import dumps
 from pathlib import Path
 from re import finditer
-from typing import NamedTuple
 
 from cyclopts import App
 
-from pyxmatlab_tools import sync
-from pyxmatlab_tools.sync import (
-    COMPS,
-    PYPROJECT,
-    PYRIGHTCONFIG,
-    PYTEST,
-    escape,
-    get_comp_names,
-)
+from pyxmatlab_tools.sync import check_compilation, escape
 
 APP = App(help_format="markdown")
 """CLI."""
 
 
-def main():
-    """Invoke the CLI."""
+def main():  # noqa: D103
     APP()
 
 
-class Comp(NamedTuple):
-    """Dependency compilation."""
-
-    low: Path
-    """Path to the lowest direct dependency compilation."""
-    high: Path
-    """Path to the highest dependency compilation."""
+@APP.command
+def compile(high: bool = False):  # noqa: A001
+    """Compile."""
+    log(check_compilation(high))
 
 
-@APP.command()
-def lock():
-    log(sync.lock())
-
-
-@APP.command()
-def compile():  # noqa: A001
-    """Prepare a compilation.
-
-    Args:
-        get: Get the compilation rather than compile it.
-    """
-    comp_paths = Comp(*[COMPS / f"{name}.txt" for name in get_comp_names()])
-    COMPS.mkdir(exist_ok=True, parents=True)
-    for path, comp in zip(comp_paths, sync.compile(), strict=True):
-        path.write_text(encoding="utf-8", data=comp)
-    log(comp_paths)
-
-
-@APP.command()
+@APP.command
 def get_actions():
     """Get actions used by this repository.
 
@@ -65,8 +31,10 @@ def get_actions():
     paste the output of this command into the "Allow specified actions and reusable
     workflows" block.
 
-    Args:
-        high: Highest dependencies.
+    Parameters
+    ----------
+    high
+        Highest dependencies.
     """
     actions: list[str] = []
     for contents in [
@@ -77,31 +45,6 @@ def get_actions():
             for match in finditer(r'uses:\s?"?(?P<action>.+)@', contents)
         ])
     log(sorted(set(actions)))
-
-
-@APP.command()
-def sync_local_dev_configs():
-    """Synchronize local dev configs to shadow `pyproject.toml`, with some changes.
-
-    Duplicate pyright and pytest configuration from `pyproject.toml` to
-    `pyrightconfig.json` and `pytest.ini`, respectively. These files shadow the
-    configuration in `pyproject.toml`, which drives CI or if shadow configs are not
-    present. Shadow configs are in `.gitignore` to facilitate local-only shadowing.
-
-    Concurrent test runs are disabled in the local pytest configuration which slows down
-    the usual local, granular test workflow.
-    """
-    config = tomllib.loads(PYPROJECT.read_text("utf-8"))
-    # Write pyrightconfig.json
-    pyright = config["tool"]["pyright"]
-    data = dumps(pyright, indent=2)
-    PYRIGHTCONFIG.write_text(encoding="utf-8", data=f"{data}\n")
-    # Write pytest.ini
-    pytest = config["tool"]["pytest"]["ini_options"]
-    PYTEST.write_text(
-        encoding="utf-8",
-        data="\n".join(["[pytest]", *[f"{k} = {v}" for k, v in pytest.items()], ""]),
-    )
 
 
 def log(obj):

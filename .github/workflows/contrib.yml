@@ -19,7 +19,8 @@ defaults:
   run:
     shell: "pwsh"
 env:
-  SYNC_PY_DISABLE_CI: true
+  UV_CACHE_DIR: ".cache/uv-cache"
+  SYNC_PY_DISABLE_CI: True
 jobs:
   no-spaces-in-path:
     strategy:
@@ -28,15 +29,20 @@ jobs:
           - "macos-14"
           - "ubuntu-22.04"
           - "windows-2022"
+        python: ["3.11"]
     runs-on: "${{ matrix.runner }}"
     steps:
-      - uses: "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11" # v4.1.1
+      - uses: "actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f" # v4.1.3
         with:
           submodules: True
+      - uses: "actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9" # v4.0.2
+        with:
+          path: "${{ env.UV_CACHE_DIR }}"
+          key: "uv-${{ matrix.runner }}-${{ matrix.python }}-${{ hashFiles('lock.json') }}"
       - uses: "actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d" # v5.1.0
         with:
-          python-version: "3.11"
-      - run: "scripts/Sync-Py.ps1 -Lock -Version '3.11'"
+          python-version: "${{ matrix.python }}"
+      - run: "scripts/Sync-Py.ps1 -Version '3.11'"
   spaces-in-path:
     strategy:
       matrix:
@@ -44,15 +50,20 @@ jobs:
           - "macos-14"
           - "ubuntu-22.04"
           - "windows-2022"
+        python: ["3.11"]
     runs-on: "${{ matrix.runner }}"
     steps:
       - run: "New-Item -ItemType Directory 'repo path with spaces'"
-      - uses: "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11" # v4.1.1
+      - uses: "actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f" # v4.1.3
         with:
           submodules: True
           path: "repo path with spaces"
+      - uses: "actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9" # v4.0.2
+        with:
+          path: "${{ env.UV_CACHE_DIR }}"
+          key: "uv-${{ matrix.runner }}-${{ matrix.python }}-${{ hashFiles('lock.json') }}"
       - uses: "actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d" # v5.1.0
         with:
-          python-version: "3.11"
+          python-version: "${{ matrix.python }}"
       - working-directory: "repo path with spaces"
-        run: "scripts/Sync-Py.ps1 -Lock -Version '3.11'"
+        run: "scripts/Sync-Py.ps1 -Version '3.11'"

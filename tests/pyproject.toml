@@ -7,6 +7,7 @@ name = "pyxmatlab_tests"
 version = "0.0.0"
 description = "Tests."
 dependencies = [
+    # ? Core testing
     "pytest-cov==4.1.0",
     "pytest-custom-exit-code==0.3.0",
     "pytest-github-actions-annotate-failures==0.2.0",
@@ -14,7 +15,18 @@ dependencies = [
 ]
 
 [tool.fawltydeps]
-actions = ["check_undeclared"]
-deps = ["tests/pyproject.toml", "pyproject.toml"]
+deps = ["tests/pyproject.toml"]
 code = ["tests/pyxmatlab_tests"]
-ignore_undeclared = ["pyxmatlab"]
+ignore_undeclared = [
+    "pyxmatlab_docs",
+    "pyxmatlab_tests",
+    "pyxmatlab_tools",
+    "pyxmatlab",
+]
+ignore_unused = [
+    # ? Core testung tools or plugins
+    "pytest-cov",
+    "pytest-custom-exit-code",
+    "pytest-github-actions-annotate-failures",
+    "pytest",
+]
