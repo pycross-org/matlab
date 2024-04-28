@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: "Ask a question"
-    url: "https://github.com/pycross/matlab/discussions/new?category=q-a"
+    url: "https://github.com/pycross-org/matlab/discussions/new?category=q-a"
     about: "Ask for help. Please search related Q&As in case your question has been asked before."

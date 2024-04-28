@@ -4,7 +4,7 @@ Opening this repository in VSCode may run a setup script on folder open if you t
 
 # Contributing
 
-Thank you for considering contributing to `pyxmatlab`! No contribution is too small, even if you are just submitting a Pull Request through the GitHub UI to fix some typos or clarify our language! Before attempting larger changes, please [discuss it with us](<https://github.com/pycross/matlab/discussions/new?category=q-a>) or participate in the relevant [issue](<https://github.com/search?q=repo%3Apycross/matlab&type=issues>) topic.
+Thank you for considering contributing to `pyxmatlab`! No contribution is too small, even if you are just submitting a Pull Request through the GitHub UI to fix some typos or clarify our language! Before attempting larger changes, please [discuss it with us](<https://github.com/pycross-org/matlab/discussions/new?category=q-a>) or participate in the relevant [issue](<https://github.com/search?q=repo%3Apycross-org/matlab&type=issues>) topic.
 
 This guide gives the high-level details needed for you to jump right in, but links to more detail throughout. And remember, [we're always learning](#were-always-learning)!
 
@@ -23,9 +23,9 @@ This guide consists of the following:
 
 ## We're always learning
 
-You already know that no contribution is too small, but also, no question is too small! We are here to help you contribute, so feel free to reach out with [questions](<https://github.com/pycross/matlab/discussions/new?category=q-a>) or submit your Pull Request as a "Draft" and mention (`@`) one of us if you need help along the way.
+You already know that no contribution is too small, but also, no question is too small! We are here to help you contribute, so feel free to reach out with [questions](<https://github.com/pycross-org/matlab/discussions/new?category=q-a>) or submit your Pull Request as a "Draft" and mention (`@`) one of us if you need help along the way.
 
-If you want to contribute but aren't sure where to start, chime in on any [good first issues](<https://github.com/pycross/matlab/?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22>) (or any issue) that interests you and we'll point you in the right direction! And remember that it's natural to experience some anxiety or or discomfort during this process. If you're new to contributing, you may be learning all of these things at once:
+If you want to contribute but aren't sure where to start, chime in on any [good first issues](<https://github.com/pycross-org/matlab/?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22>) (or any issue) that interests you and we'll point you in the right direction! And remember that it's natural to experience some anxiety or or discomfort during this process. If you're new to contributing, you may be learning all of these things at once:
 
 - How to interact with maintainers (strangers?!).
 - How to write Python code.
@@ -42,13 +42,13 @@ This project and its guide are set up to smooth out that learning curve for you 
 > [!IMPORTANT]
 > Project tooling requires installation of [cross-platform PowerShell](#cross-platform-powershell). This guide also features VSCode-specific instruction, but you are not required to use VSCode to contribute. The decision to organize around a single IDE and shell enables the cross-platform, beginner-friendly contributing experience.
 
-To make a new contribution, fork this repository, clone it, switch to a new branch (please don't commit directly to `main`), run [`scripts/Sync-Py.ps1`](<https://github.com/pycross/matlab/blob/main/scripts/Sync-Py.ps1>), make changes, commit and push them, and open a Pull Request targeting `main`. You may also open a draft Pull Request if you want feedback before your branch is ready to merge, but remember to mention (`@`) us. In more detail:
+To make a new contribution, fork this repository, clone it, switch to a new branch (please don't commit directly to `main`), run [`scripts/Sync-Py.ps1`](<https://github.com/pycross-org/matlab/blob/main/scripts/Sync-Py.ps1>), make changes, commit and push them, and open a Pull Request targeting `main`. You may also open a draft Pull Request if you want feedback before your branch is ready to merge, but remember to mention (`@`) us. In more detail:
 
 - Perform first-time setup, including installing [cross-platform PowerShell](#cross-platform-powershell) and Python 3.11 [(details)](#first-time-setup).
 - Fork the repository by selecting "Fork" near the top-right corner of the project page on GitHub. Clone your fork and open it locally, e.g. in VSCode [(details)](#fork-and-clone).
 - If using VSCode, consider installing the recommended extensions when prompted [(details)](#installing-recommended-extensions-in-vscode).
 - Create a new branch and switch to it, e.g. `git checkout -b my-new-feature` or in VSCode or select `+` in the GitLens branches view ([Palette: `GitLens: Show Branches View`](#vscode-command-palette)).
-- If not already run automatically, run [`scripts/Sync-Py.ps1`](<https://github.com/pycross/matlab/blob/main/scripts/Sync-Py.ps1>) to [set up your contribution environment](#contribution-environment-sync).
+- If not already run automatically, run [`scripts/Sync-Py.ps1`](<https://github.com/pycross-org/matlab/blob/main/scripts/Sync-Py.ps1>) to [set up your contribution environment](#contribution-environment-sync).
 - If using VSCode, respond `Yes` when prompted to select the virtual environment for your workspace, or select it later [(details)](#set-your-python-interpreter).
 - Make changes, commit, and push them. [(details)](#making-changes).
   - Follow [code](#code) style and ensure changes pass [checks](#checks).
@@ -60,7 +60,7 @@ To make a new contribution, fork this repository, clone it, switch to a new bran
 
 ## Checks
 
-Code and documentation style is checked with `pre-commit` and in continuous integration (CI) when you submit a Pull Request. Please ask [a question](<https://github.com/pycross/matlab/discussions/new?category=q-a>) if you are having trouble passing local `pre-commit` checks. `pyright` checks Python type annotations, `ruff` checks and formats code, `markdownlint-cli2` chcks and formats Markdown, and `fawltydeps` checks dependencies. VSCode is configured to auto-format on save, and certain tools will automatically apply fixes on save. See the [contributor tools guide](#contributor-tools-guide) for more detail on interactive tool usage in VSCode.
+Code and documentation style is checked with `pre-commit` and in continuous integration (CI) when you submit a Pull Request. Please ask [a question](<https://github.com/pycross-org/matlab/discussions/new?category=q-a>) if you are having trouble passing local `pre-commit` checks. `pyright` checks Python type annotations, `ruff` checks and formats code, `markdownlint-cli2` chcks and formats Markdown, and `fawltydeps` checks dependencies. VSCode is configured to auto-format on save, and certain tools will automatically apply fixes on save. See the [contributor tools guide](#contributor-tools-guide) for more detail on interactive tool usage in VSCode.
 
 > [!IMPORTANT]
 > If `pre-commit` fails while committing with the VSCode UI, it will throw up a dialog with a scary red "X" and an unhelpful message. Always select `Show Command Output` in this dialog and search for `failed` in the resulting window with `Ctrl+F`. Alternatively, run the [`pre-commit` VSCode Task](#run-a-vscode-task) to get color-coded feedback in the terminal instead.
@@ -259,7 +259,7 @@ If you missed your chance on initial setup, you can still set the Python interpr
 
 ### Conditions in which VSCode automatic tasks run
 
-If you have trusted this folder in VSCode or have `security.workspace.trust.enabled` set to `false` in your User `settings.json` and have `task.allowAutomaticTasks` set to `on` in your User `settings.json`, the VSCode Task `setup: Sync contributor environment` automatically runs on folder open and invokes [`scripts/Sync-Py.ps1`](<https://github.com/pycross/matlab/blob/main/scripts/Sync-Py.ps1>).
+If you have trusted this folder in VSCode or have `security.workspace.trust.enabled` set to `false` in your User `settings.json` and have `task.allowAutomaticTasks` set to `on` in your User `settings.json`, the VSCode Task `setup: Sync contributor environment` automatically runs on folder open and invokes [`scripts/Sync-Py.ps1`](<https://github.com/pycross-org/matlab/blob/main/scripts/Sync-Py.ps1>).
 
 ### Disable automatic tasks in VSCode
 
@@ -273,11 +273,11 @@ It should only trigger if you have allowed VSCode Tasks to run automatically and
 
 ### Cross-platform PowerShell
 
-PowerShell, once a Windows-only system shell, is now supported on Windows, MacOS, and Linux alike. This repository features tooling that sets up the environment with [`scripts/Sync-Py.ps1`](<https://github.com/pycross/matlab/blob/main/scripts/Sync-Py.ps1>), to be run on cross-platform PowerShell, which, among other things, [sources the appropriate Python version](#source-for-different-system-python-versions). Install PowerShell [like this](https://github.com/PowerShell/PowerShell#get-powershell).
+PowerShell, once a Windows-only system shell, is now supported on Windows, MacOS, and Linux alike. This repository features tooling that sets up the environment with [`scripts/Sync-Py.ps1`](<https://github.com/pycross-org/matlab/blob/main/scripts/Sync-Py.ps1>), to be run on cross-platform PowerShell, which, among other things, [sources the appropriate Python version](#source-for-different-system-python-versions). Install PowerShell [like this](https://github.com/PowerShell/PowerShell#get-powershell).
 
-The contents of [`scripts/Initialize-Shell.ps1`](<https://github.com/pycross/matlab/blob/main/scripts/Initialize-Shell.ps1>) represents a sort of "profile" for your PowerShell terminal sessions. But you are not required to add it to your user shell profile. Instead, it is explicitly invoked whenever needed, including in other shell scripts, local `pre-commit` hooks and in VSCode Tasks.
+The contents of [`scripts/Initialize-Shell.ps1`](<https://github.com/pycross-org/matlab/blob/main/scripts/Initialize-Shell.ps1>) represents a sort of "profile" for your PowerShell terminal sessions. But you are not required to add it to your user shell profile. Instead, it is explicitly invoked whenever needed, including in other shell scripts, local `pre-commit` hooks and in VSCode Tasks.
 
-However, if you do want to add it to your user shell profile, you may do so by running `code $PROFILE` in `pwsh` after you have installed it, which will open your `pwsh` user profile in VSCode. You may then copy the contents of [`scripts/Initialize-Shell.ps1`](<https://github.com/pycross/matlab/blob/main/scripts/Initialize-Shell.ps1>) into a conditional statement that checks whether you are in this project's directory (e.g. `matlab`), like so:
+However, if you do want to add it to your user shell profile, you may do so by running `code $PROFILE` in `pwsh` after you have installed it, which will open your `pwsh` user profile in VSCode. You may then copy the contents of [`scripts/Initialize-Shell.ps1`](<https://github.com/pycross-org/matlab/blob/main/scripts/Initialize-Shell.ps1>) into a conditional statement that checks whether you are in this project's directory (e.g. `matlab`), like so:
 
 ```PowerShell
 if ((Get-Item '.' | Select-Object -ExpandProperty 'Name') -eq 'matlab') {
@@ -316,7 +316,7 @@ In short, in Python dependency specifications, `<3` doesn't have the same heart-
 
 ### Source for different system Python versions
 
-This project looks for Python 3.11 on your system to generate the [virtual environment](#virtual-environment) used for development. See how to [install Python](#installing-python) if you don't have Python installed at all. If your system has any version of Python pre-installed other than Python 3.11 used for development, a temporary virtual environment with `zstandard` is installed and [`scripts/install.py`](<https://github.com/pycross/matlab/blob/main/scripts/install.py>) used to source the necessary Python version from [`indygreg/python-build-standalone`](https://github.com/indygreg/python-build-standalone). This approach is derived from the one used by the [`uv`](https://github.com/astral-sh/uv) team to source Python binaries for their tooling!
+This project looks for Python 3.11 on your system to generate the [virtual environment](#virtual-environment) used for development. See how to [install Python](#installing-python) if you don't have Python installed at all. If your system has any version of Python pre-installed other than Python 3.11 used for development, a temporary virtual environment with `zstandard` is installed and [`scripts/install.py`](<https://github.com/pycross-org/matlab/blob/main/scripts/install.py>) used to source the necessary Python version from [`indygreg/python-build-standalone`](https://github.com/indygreg/python-build-standalone). This approach is derived from the one used by the [`uv`](https://github.com/astral-sh/uv) team to source Python binaries for their tooling!
 
 looks for any system Python on your machine, and uses it directly to create a development [virtual environment](#virtual-environment) if it's the correct version, or sources the expected version of Python (in a project-local `bin`)
 
@@ -330,7 +330,7 @@ Depending on my OS, I use "system Python environment" or just "system Python" to
 
 ### Contribution environment sync
 
-This repository features tooling that bootstraps the entire development environment with [`scripts/Sync-Py.ps1`](<https://github.com/pycross/matlab/blob/main/scripts/Sync-Py.ps1>), to be run on [cross-platform PowerShell](#cross-platform-powershell), and the contribution workflow is tested on Windows, Ubuntu, and MacOS 13. If on Windows, you may need to complete `Task 1` in [this guide](https://denisecase.github.io/windows-setup/) to allow scripts to run. [`scripts/Sync-Py.ps1`](<https://github.com/pycross/matlab/blob/main/scripts/Sync-Py.ps1>) ([Task: `setup: Sync contributor environment`](#run-a-vscode-task)). The [`scripts/Sync-Py.ps1`](<https://github.com/pycross/matlab/blob/main/scripts/Sync-Py.ps1>) script essentially does the following:
+This repository features tooling that bootstraps the entire development environment with [`scripts/Sync-Py.ps1`](<https://github.com/pycross-org/matlab/blob/main/scripts/Sync-Py.ps1>), to be run on [cross-platform PowerShell](#cross-platform-powershell), and the contribution workflow is tested on Windows, Ubuntu, and MacOS 13. If on Windows, you may need to complete `Task 1` in [this guide](https://denisecase.github.io/windows-setup/) to allow scripts to run. [`scripts/Sync-Py.ps1`](<https://github.com/pycross-org/matlab/blob/main/scripts/Sync-Py.ps1>) ([Task: `setup: Sync contributor environment`](#run-a-vscode-task)). The [`scripts/Sync-Py.ps1`](<https://github.com/pycross-org/matlab/blob/main/scripts/Sync-Py.ps1>) script essentially does the following:
 
 - Sets some environment variables and error handling.
 - Installs [`uv`](https://github.com/astral-sh/uv).

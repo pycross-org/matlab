@@ -8,12 +8,12 @@ body:
       label: "Please check that this bug hasn't been reported before"
       options:
         - required: True
-          label: "I searched previous bug reports [here](https://github.com/pycross/matlab/issues?q=label%3Abug+sort%3Acomments-desc) or [here](https://github.com/search?q=repo%3Apycross/matlab+label%3Abug&type=issues) and didn't find any similar reports."
+          label: "I searched previous bug reports [here](https://github.com/pycross-org/matlab/issues?q=label%3Abug+sort%3Acomments-desc) or [here](https://github.com/search?q=repo%3Apycross-org/matlab+label%3Abug&type=issues) and didn't find any similar reports."
   - type: "checkboxes"
     id: "latest-version"
     attributes:
       label: "Please confirm that this bug affects the latest version"
-      description: "Please verify the issue is present in the latest version by installing it with `pip install pyxmatlab==2024.03.02` and checking. If you have other issues or questions about earlier versions, please visit the [Q&A](https://github.com/pycross/matlab/discussions/new?category=q-a)."
+      description: "Please verify the issue is present in the latest version by installing it with `pip install pyxmatlab==2024.03.02` and checking. If you have other issues or questions about earlier versions, please visit the [Q&A](https://github.com/pycross-org/matlab/discussions/new?category=q-a)."
       options:
         - required: True
           label: "This bug affects version `2024.03.02` of `pyxmatlab`."

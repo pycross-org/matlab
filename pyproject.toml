@@ -12,10 +12,10 @@ requires-python = ">=3.11"
 classifiers = ["License :: OSI Approved :: MIT License"]
 dependencies = []
 [project.urls]
-Changes = "https://pycross.github.io/matlab/changelog.html"
-Docs = "https://pycross.github.io/matlab"
-Home = "https://github.com/pycross/matlab"
-Tracker = "https://github.com/pycross/matlab/issues"
+Changes = "https://pycross-org.github.io/matlab/changelog.html"
+Docs = "https://pycross-org.github.io/matlab"
+Home = "https://github.com/pycross-org/matlab"
+Tracker = "https://github.com/pycross-org/matlab/issues"
 [[project.authors]]
 name = "Blake Naccarato"
 email = "blake.naccarato@gmail.com"
@@ -52,7 +52,7 @@ directory = "changelog"
 filename = "CHANGELOG.md"
 template = "changelog/towncrier_template.md.jinja"
 title_format = ""
-issue_format = "[#{issue}](https://github.com/pycross/matlab/{issue})"
+issue_format = "[#{issue}](https://github.com/pycross-org/matlab/{issue})"
 underlines = ["", "", ""]
 [[tool.towncrier.section]]
 path = ""

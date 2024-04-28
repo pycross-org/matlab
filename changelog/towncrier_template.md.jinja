@@ -1,10 +1,10 @@
 {# Built documentation only #}{%- if versiondata["version"] == "main" -%}
 ## Unreleased
 :::{warning}
-These changes reflect the current [development progress](https://github.com/pycross/matlab/tree/main) and have **not** been part of a PyPI release yet.
+These changes reflect the current [development progress](https://github.com/pycross-org/matlab/tree/main) and have **not** been part of a PyPI release yet.
 :::
 {# CHANGELOG.md entries #}{% else -%}
-## [{{ versiondata["version"] }}](https://github.com/pycross/matlab/tree/{{ versiondata["version"] }}){% endif %}
+## [{{ versiondata["version"] }}](https://github.com/pycross-org/matlab/tree/{{ versiondata["version"] }}){% endif %}
 {% for section, _ in sections.items() %}
 
 {% for category, val in definitions.items() if category in sections[section] %}

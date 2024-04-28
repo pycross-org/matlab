@@ -8,7 +8,7 @@ body:
       label: "Please check that this feature hasn't been requested before"
       options:
         - required: True
-          label: "I searched previous feature requests [here](https://github.com/pycross/matlab/issues?q=label%3Aenhancement+sort%3Acomments-desc) or [here](https://github.com/search?q=repo%3Apycross/matlab+label%3Aenhancement&type=issues) and didn't find any similar requests."
+          label: "I searched previous feature requests [here](https://github.com/pycross-org/matlab/issues?q=label%3Aenhancement+sort%3Acomments-desc) or [here](https://github.com/search?q=repo%3Apycross-org/matlab+label%3Aenhancement&type=issues) and didn't find any similar requests."
   - type: "textarea"
     id: "feature-description"
     validations:
