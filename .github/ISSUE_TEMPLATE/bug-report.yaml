@@ -1,5 +1,5 @@
 name: "🐞 Bug report"
-description: "Report a bug"
+description: "Report a bug. Please don't request features or ask usage questions here."
 labels: ["bug"]
 body:
   - type: "checkboxes"
