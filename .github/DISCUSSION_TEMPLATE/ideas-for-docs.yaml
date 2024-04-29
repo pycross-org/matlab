@@ -1,5 +1,4 @@
-name: "Documentation request"
-description: "Request documentation improvements"
+title: "Ideas for docs"
 labels: ["docs"]
 body:
   - type: "checkboxes"

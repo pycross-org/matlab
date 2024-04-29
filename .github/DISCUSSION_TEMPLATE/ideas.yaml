@@ -1,5 +1,4 @@
-name: "Feature request"
-description: "Request a new feature"
+title: "Ideas for software features"
 labels: ["enhancement"]
 body:
   - type: "checkboxes"

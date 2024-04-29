@@ -1,0 +1,23 @@
+name: "⚠️ Internal use only"
+description: "Please only use this as a maintainer or if recommended to do so by a maintainer."
+labels: ["internal"]
+body:
+  - type: "checkboxes"
+    id: "usage"
+    attributes:
+      label: "Please only use for internal matters."
+      options:
+        - required: True
+          label: "I am a maintainer or a maintainer has recommended me to use this form."
+  - type: "textarea"
+    id: "description"
+    validations:
+      required: True
+    attributes:
+      label: "Description"
+      description: "Please describe the change."
+  - type: "textarea"
+    id: "possible-solution"
+    attributes:
+      label: "Steps"
+      description: "Please describe the steps to making this change."

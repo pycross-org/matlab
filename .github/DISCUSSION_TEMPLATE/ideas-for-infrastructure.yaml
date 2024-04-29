@@ -1,5 +1,4 @@
-name: "Infrastructure change"
-description: "Report infrastructure or other development concerns"
+title: "Ideas for infrastructure and tooling"
 labels: ["infra"]
 body:
   - type: "checkboxes"

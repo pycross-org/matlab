@@ -1,0 +1,15 @@
+title: "⚠️ Internal use only"
+labels: ["internal"]
+body:
+  - type: "textarea"
+    id: "description"
+    validations:
+      required: True
+    attributes:
+      label: "Description"
+      description: "Please describe the change."
+  - type: "textarea"
+    id: "possible-solution"
+    attributes:
+      label: "Steps"
+      description: "Please describe the steps to making this change."
