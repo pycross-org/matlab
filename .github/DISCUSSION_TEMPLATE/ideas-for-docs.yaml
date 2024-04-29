@@ -6,7 +6,7 @@ body:
       label: "Please check for similar discussions first"
       options:
         - required: True
-          label: "I [searched](https://github.com/pycross-org/matlab/discussions/categories/ideas-for-docs) and couldn't find a similar discussion."
+          label: "I [searched](https://github.com/pycross-org/matlab/discussions/categories/ideas-for-docs) and couldn't find an appropriate discussion to participate in instead."
   - type: "textarea"
     id: "description"
     validations:

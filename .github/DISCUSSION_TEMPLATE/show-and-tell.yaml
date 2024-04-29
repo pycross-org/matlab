@@ -1,0 +1,8 @@
+body:
+  - type: "textarea"
+    id: "description"
+    validations:
+      required: True
+    attributes:
+      label: "Description"
+      description: "Show us what you got! We welcome show-and-tells big and small."

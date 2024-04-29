@@ -1,4 +1,3 @@
-labels: ["question"]
 body:
   - type: "checkboxes"
     id: "no-duplicates"
@@ -6,11 +5,11 @@ body:
       label: "Please check for similar discussions first"
       options:
         - required: True
-          label: "I [searched](https://github.com/pycross-org/matlab/discussions/categories/q-a) and couldn't find an appropriate discussion to participate in instead."
+          label: "I [searched](https://github.com/pycross-org/matlab/discussions/categories/general) and couldn't find an appropriate discussion to participate in instead."
   - type: "textarea"
     id: "description"
     validations:
       required: True
     attributes:
       label: "Description"
-      description: "Please describe your question"
+      description: "Please describe what you would like to discuss."
