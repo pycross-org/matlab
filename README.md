@@ -1,6 +1,6 @@
 # pyxmatlab
 
-What do you get when you cross Python with MATLAB?
+Foo. What do you get when you cross Python with MATLAB?
 
 ## Project information
 
