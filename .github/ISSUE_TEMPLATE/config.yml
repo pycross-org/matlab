@@ -7,7 +7,7 @@ contact_links:
     about: "Feature requests. Please search related ideas in case a similar request has been made before."
     url: "https://github.com/pycross-org/matlab/discussions/new?category=ideas"
   - name: "📜 Share an idea for documentation"
-    about: "Suggestions for documentation or tutorial content. Please search related ideas in case a similar request has been made before."
+    about: "Suggestions for documentation or tutorial content. You're welcome to submit typo PRs without discussing it first! Please search related ideas in case a similar request has been made before."
     url: "https://github.com/pycross-org/matlab/discussions/new?category=ideas-for-docs"
   - name: "⚙️ Share an idea for project infrastructure"
     about: "Suggestions for project infrastructure and tooling. Please search related ideas in case a similar request has been made before."
