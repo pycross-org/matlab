@@ -1,15 +1,16 @@
-title: "⚠️ Internal discussion"
 labels: ["internal"]
 body:
+  - type: "checkboxes"
+    id: "no-duplicates"
+    attributes:
+      label: "Please check for similar discussions first"
+      options:
+        - required: True
+          label: "I [searched](https://github.com/pycross-org/matlab/discussions/categories/internal) and couldn't find a similar discussion."
   - type: "textarea"
     id: "description"
     validations:
       required: True
     attributes:
       label: "Description"
-      description: "Please describe the change."
-  - type: "textarea"
-    id: "possible-solution"
-    attributes:
-      label: "Steps"
-      description: "Please describe the steps to making this change."
+      description: "Please describe the internal matter. Please provide a few details as to how this matter might be handled."

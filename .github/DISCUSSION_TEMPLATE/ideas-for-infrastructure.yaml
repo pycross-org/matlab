@@ -1,22 +1,16 @@
-title: "Ideas for infrastructure and tooling"
 labels: ["infra"]
 body:
   - type: "checkboxes"
-    id: "usage"
+    id: "no-duplicates"
     attributes:
-      label: "Please only use this form for changes to tooling, non-feature refactoring, dependency updates, and other infrastructure concerns."
+      label: "Please check for similar discussions first"
       options:
         - required: True
-          label: "This request is about infrastructure. It is not about a bug report, feature request, or documentation suggestion."
+          label: "I [searched](https://github.com/pycross-org/matlab/discussions/categories/ideas-for-infrastructure) and couldn't find a similar discussion."
   - type: "textarea"
     id: "description"
     validations:
       required: True
     attributes:
       label: "Description"
-      description: "Please describe the change."
-  - type: "textarea"
-    id: "possible-solution"
-    attributes:
-      label: "Steps"
-      description: "Please describe the steps to making this change."
+      description: "Please describe your idea. Please provide a few details as to how this idea might be implemented."

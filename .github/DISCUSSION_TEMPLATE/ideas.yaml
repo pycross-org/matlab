@@ -1,22 +1,16 @@
-title: "Ideas for software features"
 labels: ["enhancement"]
 body:
   - type: "checkboxes"
-    id: "no-duplicate-issues"
+    id: "no-duplicates"
     attributes:
-      label: "Please check that this feature hasn't been requested before"
+      label: "Please check for similar discussions first"
       options:
         - required: True
-          label: "I searched previous feature requests [here](https://github.com/pycross-org/matlab/issues?q=label%3Aenhancement+sort%3Acomments-desc) or [here](https://github.com/search?q=repo%3Apycross-org/matlab+label%3Aenhancement&type=issues) and didn't find any similar requests."
+          label: "I [searched](https://github.com/pycross-org/matlab/discussions/categories/ideas) and couldn't find a similar discussion."
   - type: "textarea"
-    id: "feature-description"
+    id: "description"
     validations:
       required: True
     attributes:
-      label: "Feature description"
-      description: "Please describe your requested feature"
-  - type: "textarea"
-    id: "possible-solution"
-    attributes:
-      label: "Possible implementation"
-      description: "Please provide a few details as to how this feature might be implemented"
+      label: "Description"
+      description: "Please describe your idea. Please provide a few details as to how this idea might be implemented."
