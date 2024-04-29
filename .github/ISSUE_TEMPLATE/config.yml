@@ -12,3 +12,6 @@ contact_links:
   - name: "⚙️ Share an idea for project infrastructure"
     about: "Suggestions for project infrastructure and tooling. Please search related ideas in case a similar request has been made before."
     url: "https://github.com/pycross-org/matlab/discussions/new?category=ideas-for-infrastructure"
+  - name: "❔ Have something else in mind?"
+    about: "Please choose the most appropriate discussion category for your concern. Please search related ideas in case a similar request has been made before."
+    url: "https://github.com/pycross-org/matlab/discussions/new/choose"
