@@ -13,7 +13,7 @@ body:
     id: "latest-version"
     attributes:
       label: "Please confirm that this bug affects the latest version"
-      description: "Please verify the issue is present in the latest version by installing it with `pip install pyxmatlab==2024.03.02` and checking that the bug is still there."
+      description: "Please verify the issue is present in the latest version by installing it with `pip install pyxmatlab==2024.03.02` and checking that the bug is still there"
       options:
         - required: True
           label: "This bug affects version `2024.03.02` of `pyxmatlab`."
@@ -21,7 +21,7 @@ body:
     id: "operating-systems"
     attributes:
       label: "Please indicate which operating system(s) you are using"
-      description: "Please select the most appropriate choice(s) if your exact OS is not listed."
+      description: "Please select the most appropriate choice(s) if your exact OS is not listed"
       options:
         - label: "Linux"
         - label: "macOS"

@@ -13,4 +13,4 @@ body:
       required: True
     attributes:
       label: "Description"
-      description: "Please describe your question."
+      description: "Please describe your question"
