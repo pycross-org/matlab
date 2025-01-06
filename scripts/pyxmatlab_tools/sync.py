@@ -214,7 +214,7 @@ def compile(  # noqa: A001
     deps = result.stdout
     submodules = {
         sub.group(): run(
-            split(f"git rev-parse HEAD:{sub.group()}"),  # noqa: S603
+            split(f"git rev-parse HEAD:{sub.group()}"),
             capture_output=True,
             check=True,
             text=True,
