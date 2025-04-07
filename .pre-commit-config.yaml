@@ -83,16 +83,16 @@ repos:
             |tests/.*
           )$
   - repo: "https://github.com/pre-commit/pre-commit-hooks"
-    rev: "v4.6.0"
+    rev: "v5.0.0"
     hooks:
       - id: "end-of-file-fixer"
       - id: "trailing-whitespace"
   - repo: "https://github.com/DavidAnson/markdownlint-cli2"
-    rev: "v0.13.0"
+    rev: "v0.17.2"
     hooks:
       - id: "markdownlint-cli2"
   - repo: "https://github.com/srstevenson/nb-clean"
-    rev: "3.2.0"
+    rev: "4.0.1"
     hooks:
       - id: "nb-clean"
         args:
@@ -108,7 +108,7 @@ repos:
             |tests/.*
           )$
   - repo: "https://github.com/charliermarsh/ruff-pre-commit"
-    rev: "v0.4.1"
+    rev: "v0.11.4"
     hooks:
       - id: "ruff"
         args: ["--extend-fixable", "PIE790"]
