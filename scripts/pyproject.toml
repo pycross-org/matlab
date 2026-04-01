@@ -8,7 +8,7 @@ version = "0.0.0"
 description = "Tools."
 dependencies = [
     # ? Core script tools
-    "copier==9.2.0",
+    "copier==9.14.1",
     "cyclopts==2.6.1",
     "pipx==1.5.0",
 ]
